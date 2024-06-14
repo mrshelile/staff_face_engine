@@ -4,24 +4,25 @@
   "info": {
     "singularName": "attendance",
     "pluralName": "attendances",
-    "displayName": "attendance"
+    "displayName": "attendance",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "employee": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "attendance"
-    },
     "entry": {
       "type": "datetime"
     },
     "exit": {
       "type": "datetime"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "attendances"
     }
   }
 }

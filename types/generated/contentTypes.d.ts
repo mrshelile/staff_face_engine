@@ -368,18 +368,19 @@ export interface ApiAttendanceAttendance extends Schema.CollectionType {
     singularName: 'attendance';
     pluralName: 'attendances';
     displayName: 'attendance';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    employee: Attribute.Relation<
-      'api::attendance.attendance',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
     entry: Attribute.DateTime;
     exit: Attribute.DateTime;
+    employee: Attribute.Relation<
+      'api::attendance.attendance',
+      'manyToOne',
+      'api::employee.employee'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -404,6 +405,7 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     singularName: 'employee';
     pluralName: 'employees';
     displayName: 'Employee';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -414,6 +416,11 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     surname: Attribute.String;
     employee_job: Attribute.String;
     picture: Attribute.Media;
+    attendances: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::attendance.attendance'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -793,11 +800,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
-    >;
-    attendance: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'api::attendance.attendance'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

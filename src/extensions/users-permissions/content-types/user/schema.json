@@ -65,12 +65,6 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
-    },
-    "attendance": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::attendance.attendance",
-      "mappedBy": "employee"
     }
   }
 }
